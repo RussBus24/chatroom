@@ -18,15 +18,19 @@ io.on('connection', function (socket) {
     
     socket.on('add user', function(userName) {
         socket.username = userName;
-        socket.broadcast.emit('user joined');
+        socket.broadcast.emit('user joined', userName);
     });
 
-    
-    socket.on('disconnect', function() {
+    socket.on('disconnect', function(userName) {
         console.log('Client disconnected.');
         usersConnected--;
         console.log('Number of connections:' + usersConnected);
+        socket.broadcast.emit('user left', userName);
     });
+    
+    /*socket.on('remove user', function(userName) {
+        socket.broadcast.emit('user left', userName);
+    });*/
     
     socket.on('message', function(message) {
         console.log('Received message:', message);

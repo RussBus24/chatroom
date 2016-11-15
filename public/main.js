@@ -7,9 +7,15 @@ $(document).ready(function() {
     
     socket.emit('add user', userName);
     
-    var userNameInput = function() {
+    socket.emit('disconnect', userName);
+    
+    var userNameInput = function(userName) {
         messages.append('<div>' + userName + ' has joined.</div>');
     };
+    
+    var userNameRemove = function(userName) {
+        messages.append('<div>' + userName + ' has left.</div>');
+    }
 
     var addMessage = function(message) {
         messages.append('<div>' + message + '</div>');
@@ -27,4 +33,5 @@ $(document).ready(function() {
     });
     socket.on('message', addMessage);
     socket.on('user joined', userNameInput);
+    socket.on('user left', userNameRemove);
 });
