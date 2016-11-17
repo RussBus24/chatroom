@@ -21,11 +21,11 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('user joined', userName);
     });
 
-    socket.on('disconnect', function(userName) {
+    socket.on('disconnect', function() {
         console.log('Client disconnected.');
         usersConnected--;
         console.log('Number of connections:' + usersConnected);
-        socket.broadcast.emit('user left', userName);
+        socket.broadcast.emit('user left', socket.username);
     });
     
     /*socket.on('remove user', function(userName) {

@@ -7,7 +7,7 @@ $(document).ready(function() {
     
     socket.emit('add user', userName);
     
-    socket.emit('disconnect', userName);
+    //socket.emit('disconnect', userName);
     
     var userNameInput = function(userName) {
         messages.append('<div>' + userName + ' has joined.</div>');
